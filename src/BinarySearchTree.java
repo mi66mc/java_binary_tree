@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BinarySearchTree {
@@ -143,5 +144,10 @@ public class BinarySearchTree {
         node.setRight(balanceHelper(list, mid + 1, end));
 
         return node;
+    }
+
+    public void fromList(List<Integer> list) {
+        Collections.sort(list);
+        root = balanceHelper(list, 0, list.size() - 1);
     }
 }

@@ -19,6 +19,7 @@ This project implements a Binary Search Tree (BST) in Java with full functionali
 - `remove(int data)`: Deletes a node while preserving BST structure.
 - `display()`: Prints the tree in a visual sideways format.
 - `balance()`: Rebuilds the tree to make it balanced.
+- `fromList(List<Integer> list)`: Build the BST from a `List<Integer>`
 
 ## 🔧 How Balancing Works
 
