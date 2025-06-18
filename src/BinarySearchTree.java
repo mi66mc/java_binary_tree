@@ -1,0 +1,117 @@
+public class BinarySearchTree {
+    private Node root;
+
+    public BinarySearchTree() {
+    }
+
+    public BinarySearchTree(Node root) {
+        this.root = root;
+    }
+
+    public Node getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node root) {
+        this.root = root;
+    }
+
+    public void insert(Node node) {
+        root = insertHelper(root, node);
+    }
+
+    private Node insertHelper(Node root, Node node) {
+        int data = node.getData();
+
+        if (root == null) {
+            root = node;
+            return root;
+        }
+
+        int rdata = root.getData();
+
+        if (rdata > data) {
+            root.setLeft(insertHelper(root.getLeft(), node));
+        } else if (rdata < data) {
+            root.setRight(insertHelper(root.getRight(), node));
+        }
+
+        return root;
+    }
+
+    public void display() {
+        displayHelper(root, 0);
+    }
+
+    private void displayHelper(Node root, int level) {
+        if (root == null) return;
+
+        displayHelper(root.getRight(), level + 1);
+        System.out.println("  ".repeat(level) + root.getData());
+        displayHelper(root.getLeft(), level + 1);
+    }
+
+    public boolean search(int data) {
+        return searchHelper(root, data);
+    }
+
+    private boolean searchHelper(Node root, int data) {
+        if (root == null) return false;
+
+        int rdata = root.getData();
+
+        if (rdata == data) {
+            return true;
+        } else if (rdata > data) {
+            return searchHelper(root.getLeft(), data);
+        } else {
+            return searchHelper(root.getRight(), data);
+        }
+    }
+
+    public void remove(int data) {
+        if (search(data)) {
+            root = removeHelper(root, data);
+        }
+    }
+
+    private Node removeHelper(Node root, int data) {
+        int rdata = root.getData();
+
+        if (rdata > data) {
+            root.setLeft(removeHelper(root.getLeft(), data));
+        } else if (rdata < data) {
+            root.setRight(removeHelper(root.getRight(), data));
+        } else {
+            if (root.getLeft() == null && root.getRight() == null) {
+                root = null;
+            } else if (root.getRight() != null) {
+                root.setData(successor(root));
+                root.setRight(removeHelper(root.getRight(), root.getData()));
+            } else {
+                root.setData(predecessor(root));
+                root.setLeft(removeHelper(root.getLeft(), root.getData()));
+            }
+        }
+
+        return root;
+    }
+
+    private int predecessor(Node root) {
+        root = root.getLeft();
+        while (root.getRight() != null) {
+            root = root.getRight();
+        }
+
+        return root.getData();
+    }
+
+    private int successor(Node root) {
+        root = root.getRight();
+        while (root.getLeft() != null) {
+            root = root.getLeft();
+        }
+
+        return root.getData();
+    }
+}
