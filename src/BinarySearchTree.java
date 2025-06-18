@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree {
     private Node root;
 
@@ -113,5 +116,32 @@ public class BinarySearchTree {
         }
 
         return root.getData();
+    }
+
+    private void inOrder(Node root, List<Integer> list) {
+        if (root == null) return;
+
+        inOrder(root.getLeft(), list);
+        list.add(root.getData());
+        inOrder(root.getRight(), list);
+    }
+
+    public void balance() {
+        List<Integer> list = new ArrayList<>();
+        inOrder(root, list);
+        root = balanceHelper(list, 0, list.size() - 1);
+    }
+
+    private Node balanceHelper(List<Integer> list, int start, int end) {
+        if (start > end) return null;
+
+        int mid = (start + end) / 2;
+
+        Node node = new Node(list.get(mid));
+
+        node.setLeft(balanceHelper(list, start, mid - 1));
+        node.setRight(balanceHelper(list, mid + 1, end));
+
+        return node;
     }
 }

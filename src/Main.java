@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         BinarySearchTree bb = new BinarySearchTree();
@@ -18,5 +21,8 @@ public class Main {
         bb.display();
         System.out.println(bb.search(8));
         System.out.println(bb.search(3));
+
+        bb.balance();
+        bb.display();
     }
 }
