@@ -15,6 +15,16 @@ public class Main {
         bb.insert(new Node(9));
         bb.insert(new Node(10));
         bb.display();
+        /*
+        * 1
+        *  \
+        *   2
+        *    \
+        *     3
+        *      \
+        *       4
+        *        ...
+        * */
         System.out.println(bb.search(5));
         System.out.println(bb.search(3));
         bb.remove(9);
@@ -23,6 +33,17 @@ public class Main {
         System.out.println(bb.search(3));
 
         bb.balance();
+        /*
+        *
+        *                   5
+        *                 /   \
+        *                2     7
+        *              /  \   /  \
+        *             1    3 6    8
+        *                   \      \
+        *                    4      10
+        *
+        * */
         bb.display();
     }
 }
